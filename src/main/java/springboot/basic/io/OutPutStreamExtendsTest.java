@@ -1,10 +1,10 @@
 /**
  * @projectName springbootTest
- * @package springboot.basic.reflect.io
- * @className springboot.basic.reflect.io.OutPutStreamExtendsTest
+ * @package springboot.basic.io
+ * @className springboot.basic.io.OutPutStreamExtendsTest
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
-package springboot.basic.reflect.io;
+package springboot.basic.io;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

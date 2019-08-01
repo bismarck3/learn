@@ -1,22 +1,17 @@
 /**
  * @projectName springbootTest
- * @package springboot.basic.reflect.io
- * @className springboot.basic.reflect.io.ReadFileTest
+ * @package springboot.basic.io
+ * @className springboot.basic.io.ReadFileTest
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
-package springboot.basic.reflect.io;
-
-import sun.swing.FilePane;
+package springboot.basic.io;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 
 /**
  * ReadFileTest

@@ -1,20 +1,16 @@
 /**
  * @projectName springbootTest
- * @package springboot.basic.reflect.io
- * @className springboot.basic.reflect.io.FileTest
+ * @package springboot.basic.io
+ * @className springboot.basic.io.FileTest
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
-package springboot.basic.reflect.io;
+package springboot.basic.io;
 
-import org.apache.commons.io.filefilter.EmptyFileFilter;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.net.URL;
 
 /**
  * FileTest

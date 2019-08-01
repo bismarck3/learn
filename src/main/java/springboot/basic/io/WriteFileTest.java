@@ -1,18 +1,16 @@
 /**
  * @projectName springbootTest
- * @package springboot.basic.reflect.io
- * @className springboot.basic.reflect.io.WriteFileTest
+ * @package springboot.basic.io
+ * @className springboot.basic.io.WriteFileTest
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
-package springboot.basic.reflect.io;
+package springboot.basic.io;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.SequenceInputStream;
 

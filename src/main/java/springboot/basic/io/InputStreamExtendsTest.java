@@ -1,15 +1,14 @@
 /**
  * @projectName springbootTest
- * @package springboot.basic.reflect.io
- * @className springboot.basic.reflect.io.InputStreamExtendsTest
+ * @package springboot.basic.io
+ * @className springboot.basic.io.InputStreamExtendsTest
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
-package springboot.basic.reflect.io;
+package springboot.basic.io;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
