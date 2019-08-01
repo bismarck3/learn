@@ -1,0 +1,26 @@
+#数据源配置
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mywork?characterEncoding=utf8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    platform: mysql
+##ehcache 
+#  cache:
+#    type: ehcache
+#    ehcache:
+#      config: classpath:ehcache.xml
+#服务器配置
+server:
+  port: 8081
+  tomcat:
+    basedir: c:/app/tomcat
+    accesslog: 
+      enabled: true
+    
+logging:
+  level:
+    springboot:
+      junit:
+        dao: DEBUG 

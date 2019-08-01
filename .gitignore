@@ -1,0 +1,25 @@
+.externalToolBuilders/
+.myeclipse/
+/.idea
+.settings/
+.classpath
+*.war
+*.class
+bin/
+classes/
+target/
+.classpath
+.mymetadata
+.project
+/src/props/local.properties
+# Artery
+local.properties
+.artery
+MANIFEST.MF
+*.launch
+*.log
+*.iml
+*.project
+.mvn/
+mvnw
+mvnw.*
