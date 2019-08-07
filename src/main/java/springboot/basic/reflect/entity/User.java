@@ -19,6 +19,16 @@ public class User {
 
     private int age;
 
+    public String phone;
+
+    public User(){
+    }
+
+    public User(String name, Integer age){
+        this.name = name;
+        this.age = age;
+    }
+
     /**
      * @return the name
      */

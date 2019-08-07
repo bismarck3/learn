@@ -6,6 +6,8 @@
  */
 package springboot.basic.calculate;
 
+import springboot.basic.PrintUtil;
+
 import java.util.Arrays;
 
 /**
@@ -135,4 +137,10 @@ public class NumberSort {
         array[j] = temp;
     }
 
+    public static void main(String[] args) {
+        for (int i : (
+            new int[] {213, 4, 3, 1, 312, 4, 312, 4132, 5215, 4, 5143, 514, 531, 5134, 5654, 3654})) {
+            System.out.print(i+",");
+        }
+    }
 }
