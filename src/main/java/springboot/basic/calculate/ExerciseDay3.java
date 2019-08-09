@@ -1,7 +1,7 @@
 /**
  * @projectName springbootTest
  * @package springboot.basic.calculate
- * @className springboot.basic.calculate.CharCountTest
+ * @className springboot.basic.calculate.ExerciseDay3
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
 package springboot.basic.calculate;
@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * CharCountTest
+ * ExerciseDay3
  *
  * @description 字符计数
  * @author wangjing
  * @date 2019/8/2 11:10
  * @version v1.0.0
  */
-public class CharCountTest {
+public class ExerciseDay3 {
 
     private static Map<String, Integer> expressCountMap = new HashMap<>();
 

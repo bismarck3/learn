@@ -51,7 +51,7 @@ public class EqualsToHashCode {
     public static void main(String[] args) {
         Map<User, Object> map = new HashMap<>();
         map.put(new User("1"), new Object());
-        map.put(new User("2"), new Object());
+        map.put(new User("1"), new Object());
 
 
         Map<User, Object> map2 = new LinkedHashMap<>();

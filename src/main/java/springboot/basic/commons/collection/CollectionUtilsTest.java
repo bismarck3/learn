@@ -6,12 +6,17 @@
  */
 package springboot.basic.commons.collection;
 
+import org.apache.commons.collections.Bag;
+import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.SetUtils;
-import org.apache.commons.collections.Transformer;
-import springboot.basic.reflect.entity.User;
+import org.apache.commons.collections.MapIterator;
+import org.apache.commons.collections.bag.HashBag;
+import org.apache.commons.collections.bidimap.DualHashBidiMap;
+import org.apache.commons.collections.list.FixedSizeList;
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.commons.collections.map.MultiKeyMap;
+import org.apache.commons.collections.map.MultiValueMap;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,7 +37,7 @@ import java.util.Set;
 public class CollectionUtilsTest {
 
     private static Character[] chars = new Character[]{'a','b','c','d','e','f','g','h','i','j','k'};
-    private static Integer[] integers = new Integer[]{10,11,12,13,14,15,16,17,18,19,20};
+    private static Integer[] integers = new Integer[]{10,11,12,13,14,15,16,17,18,19,20,10,10,11};
     private static List<Integer> numberList = new ArrayList<>(Arrays.asList(1,2,3,4,5,6,7,8,9,10,1,2,3,1,2,1));
     private static Set<Integer> numberSet = new HashSet<>(numberList);
     private static Map<Integer, String> numberMap = new HashMap<>();
@@ -83,11 +88,77 @@ public class CollectionUtilsTest {
         numberSet.forEach(System.out::println);
     }
 
-    static void test(){
+    static void testCollectionOperation(){
+        Integer[] number1 = {1,2,3,4,5,6,7};
+        Integer[] number2 = {3,4,5,8,9};
+        // union
+        Collection union = CollectionUtils.union(Arrays.asList(number1), Arrays.asList(number2));
+        Collection intersection = CollectionUtils.intersection(Arrays.asList(number1), Arrays.asList(number2));
+        Collection disjunction = CollectionUtils.disjunction(Arrays.asList(number1), Arrays.asList(number2));
+        Collection subtract = CollectionUtils.subtract(Arrays.asList(number1), Arrays.asList(number2));
+
+        System.out.println(union);
+        System.out.println(intersection);
+        System.out.println(disjunction);
+        System.out.println(subtract);
+
+    }
+
+    static void testSynchronizedAndUnmodifiable(){
+        Collection synchronizedCollection = CollectionUtils.synchronizedCollection(Arrays.asList(integers));
+        Collection unmodifiableCollection = CollectionUtils.unmodifiableCollection(Arrays.asList(integers));
+    }
+
+    static void testCardinality(){
+        System.out.println(CollectionUtils.cardinality(Integer.valueOf(10), Arrays.asList(integers)));
+    }
+
+    static void testBag(){
+        Bag bag = new HashBag();
+        bag.add(1);
+        bag.add(1);
+        bag.add(2);
+        bag.add(2);
+        System.out.println(bag.getCount(1));
+
+    }
+
+    static void testBidiMap(){
+        BidiMap bidiMap = new DualHashBidiMap();
+        bidiMap.put("1", "a");
+        bidiMap.put("2", "b");
+        System.out.println(bidiMap.getKey("a"));
+        System.out.println(bidiMap.get("2"));
+    }
+
+    static void testMultiKeyMap(){
+        MultiKeyMap multiKeyMap = new MultiKeyMap();
+        multiKeyMap.put("1", "1-1", "a");
+        multiKeyMap.put("2", "2-1", "b");
+        System.out.println(multiKeyMap.get("1","1-1"));
+    }
+
+    static void testMultiValueMap(){
+        MultiValueMap multiValueMap = new MultiValueMap();
+        multiValueMap.put("1", "a");
+        multiValueMap.put("1", "A");
+        System.out.println(multiValueMap.get("1"));
+
+    }
+
+    static void testHashedMap(){
+        HashedMap hashedMap = new HashedMap();
+        hashedMap.put("1", "a");
+        hashedMap.put("2", "b");
+        MapIterator mapIterator = hashedMap.mapIterator();
+        while(mapIterator.hasNext()){
+            mapIterator.next();
+            System.out.println(mapIterator.getKey()+"："+mapIterator.getValue());
+        }
     }
 
 
     public static void main(String[] args) {
-        testAddIgnoreNull();
+        testHashedMap();
     }
 }

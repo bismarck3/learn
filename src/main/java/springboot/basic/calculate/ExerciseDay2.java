@@ -56,7 +56,27 @@ public class ExerciseDay2 {
         return primeFactors;
     }
 
+    static void yangHuiTriangle(int height){
+        int[][] numbers = new int[height][];
+        // 二维数组的length标识numbers的行数
+        for(int i = 0 ; i < numbers.length; i++){
+            for(int k = numbers.length-1-i; k>0; k--){
+                System.out.print("  ");
+            }
+            numbers[i] = new int[i+1];
+            for(int j = 0; j < numbers[i].length; j++){
+                if(j == 0 || j == numbers[i].length -1){
+                    numbers[i][j] = 1 ;
+                }else{
+                    numbers[i][j] = numbers[i-1][j-1]+numbers[i-1][j];
+                }
+                System.out.printf("%4d", numbers[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
     public static void main(String[] args) {
-        PrintUtil.print(decomposePrimeFactor(10));
+        yangHuiTriangle(2);
     }
 }
