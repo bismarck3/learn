@@ -32,6 +32,14 @@ public class ClassApitTest {
         System.out.println(obj);
     }
 
+    static void testGetUserConstructor()
+        throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Constructor constructor = ConstructorUtils.getAccessibleConstructor(User.class, String.class);
+        Object user = constructor.newInstance("w");
+        System.out.println(user);
+    }
+    
+    
     static void testConstructorUtils()
         throws IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
         // getAccessibleConstructor
@@ -72,7 +80,7 @@ public class ClassApitTest {
 
     public static void main(String[] args)
         throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-        testFieldUtils();
+        testConstructorUtils();
     }
 
 

@@ -6,7 +6,7 @@ public class ReflectClass {
 	private int age;
 	private String address;
 	
-//	private final String s ="This is final String.";
+	private final String s ="This is final String.";
 	
 	
 	public ReflectClass() {

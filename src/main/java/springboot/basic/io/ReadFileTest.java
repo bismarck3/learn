@@ -34,6 +34,7 @@ public class ReadFileTest {
         InputStream inputStream = new FileInputStream(file);
         int byt = 0;
         while((byt=inputStream.read())!= -1){
+            System.out.println(byt);
             System.out.println((char)byt);
         }
     }
@@ -53,7 +54,6 @@ public class ReadFileTest {
     }
 
     public static void main(String[] args) throws IOException {
-//        readByte(FILE_PATH);
-        readChar(FILE_PATH);
+        readByte(FILE_PATH);
     }
 }
