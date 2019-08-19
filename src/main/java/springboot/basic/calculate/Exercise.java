@@ -6,6 +6,8 @@
  */
 package springboot.basic.calculate;
 
+import springboot.basic.reflect.entity.User;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +23,6 @@ public class Exercise {
 
     private static final String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
 
-    private static int[] point = new int[]{59,79,89,100};
-    private static char[] rank = new char[]{'D', 'C', 'B', 'A'};
-
     private static final Map<String, String> weekDoingMap = new HashMap<>();
     static{
         weekDoingMap.put("星期一", "上班");
@@ -34,6 +33,9 @@ public class Exercise {
         weekDoingMap.put("星期六", "出游");
         weekDoingMap.put("星期日", "玩游戏");
     }
+    private static int[] point = new int[]{5,79,89,100};
+    private static char[] rank = new char[]{'D', 'C', 'B', 'A'};
+
 
 
     static String getYourWeek(int weekNumber){

@@ -45,7 +45,7 @@ public class FileTest {
     }
 
     static void createFolder(){
-        File parent = new File(FILE_PARENT_PATH);
+        File parent = new File("/work/gitRepo/learn");
         File child = new File(parent, "测试文件");
         child.mkdir();
     }
@@ -56,7 +56,8 @@ public class FileTest {
         child.mkdirs();
     }
 
+
     public static void main(String[] args) throws IOException, URISyntaxException {
-        getChildrenFiles();
+        createFolder();
     }
 }

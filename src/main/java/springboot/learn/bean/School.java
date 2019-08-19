@@ -1,13 +1,13 @@
 /**
  * @projectName springbootTest
  * @package springboot.bean
- * @className springboot.bean.School
+ * @className springboot.bean.Color
  * @copyright Copyright 2018 Thuisoft, Inc. All rights reserved.
  */
 package springboot.learn.bean;
 
 /**
- * School
+ * Color
  * @description user-school
  * @author wangj
  * @date 2018年9月4日 下午12:46:00

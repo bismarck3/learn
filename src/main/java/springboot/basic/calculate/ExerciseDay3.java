@@ -19,10 +19,62 @@ import java.util.Map;
  * @date 2019/8/2 11:10
  * @version v1.0.0
  */
+class CountNumber{
+
+    private int countChinese = 0;
+    private int countLetter = 0;
+    private int countNumber = 0;
+    private int countSpace = 0;
+    private int countOther = 0;
+
+    public int getCountChinese() {
+        return countChinese;
+    }
+
+    public void setCountChinese(int countChinese) {
+        this.countChinese = countChinese;
+    }
+
+    public int getCountLetter() {
+        return countLetter;
+    }
+
+    public void setCountLetter(int countLetter) {
+        this.countLetter = countLetter;
+    }
+
+    public int getCountNumber() {
+        return countNumber;
+    }
+
+    public void setCountNumber(int countNumber) {
+        this.countNumber = countNumber;
+    }
+
+    public int getCountSpace() {
+        return countSpace;
+    }
+
+    public void setCountSpace(int countSpace) {
+        this.countSpace = countSpace;
+    }
+
+    public int getCountOther() {
+        return countOther;
+    }
+
+    public void setCountOther(int countOther) {
+        this.countOther = countOther;
+    }
+}
+
 public class ExerciseDay3 {
 
     private static Map<String, Integer> expressCountMap = new HashMap<>();
-
+    // 1 3|4|5|7|8|9 9位数字
+    // [1][3456789]\d{9}
+    // （2018）民事一审第10号
+    // [(][12][09]\d{2}[\u4e00-\u9fa5]
     private static String E1 = "[\u4e00-\u9fa5]";
     private static String E2 = "[a-zA-Z]";
     private static String E3 = "[0-9]";
@@ -30,11 +82,7 @@ public class ExerciseDay3 {
 
 
     public static void countYourLineWords(String str) {
-        int countChinese = 0;
-        int countLetter = 0;
-        int countNumber = 0;
-        int countSpace = 0;
-        int countOther = 0;
+        CountNumber countNumber = new CountNumber();
         char[] arrayChar = str.toCharArray();
         String[] arrayString = new String[arrayChar.length];
         for (int i = 0; i < arrayChar.length; i++){
@@ -42,27 +90,32 @@ public class ExerciseDay3 {
         }
 
         for (String s : arrayString) {
-            if (s.matches(E1)){
-                countChinese++;
-            }
-            else if (s.matches(E2)){
-                countLetter++;
-            }
-            else if (s.matches(E3)){
-                countNumber++;
-            }
-            else if (s.matches(E4)){
-                countSpace++;
-            }
-            else{
-                countOther++;
-            }
+            matchExpression(s, countNumber);
         }
-        System.out.println("输入的汉字个数：" + countChinese);
-        System.out.println("输入的字母个数：" + countLetter);
-        System.out.println("输入的数字个数：" + countNumber);
-        System.out.println("输入的空格个数：" + countSpace);
-        System.out.println("输入的其它字符个数：" + countOther);
+        System.out.println("输入的汉字个数：" + countNumber.getCountChinese());
+        System.out.println("输入的字母个数：" + countNumber.getCountLetter());
+        System.out.println("输入的数字个数：" + countNumber.getCountNumber());
+        System.out.println("输入的空格个数：" + countNumber.getCountSpace());
+        System.out.println("输入的其它字符个数：" + countNumber.getCountOther());
+    }
+
+    private static int matchExpression(String s, CountNumber countNumber){
+        if (s.matches(E1)){
+            countNumber.setCountChinese(countNumber.getCountChinese()+1);
+        }
+        else if (s.matches(E2)){
+            countNumber.setCountLetter(countNumber.getCountLetter()+1);
+        }
+        else if (s.matches(E3)){
+            countNumber.setCountNumber(countNumber.getCountNumber()+1);
+        }
+        else if (s.matches(E4)){
+            countNumber.setCountSpace(countNumber.getCountSpace()+1);
+        }
+        else{
+            countNumber.setCountOther(countNumber.getCountOther()+1);
+        }
+        return 0;
     }
 
     public static void countYourLineWordsTable(String str) {

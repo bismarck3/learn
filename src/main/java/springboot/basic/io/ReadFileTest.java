@@ -25,6 +25,8 @@ public class ReadFileTest {
 
     private static final String FILE_PATH = "C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习\\测试读取文件.txt";
 
+    private static final String FILE_PATH_MAC = "/work/gitRepo/learn/test.txt";
+
     /**
      * ReadFileTest
      * 以字节流的方式读取文件
@@ -33,9 +35,12 @@ public class ReadFileTest {
         File file = new File(filePath);
         InputStream inputStream = new FileInputStream(file);
         int byt = 0;
-        while((byt=inputStream.read())!= -1){
+        byte[] buff = new byte[10];
+        while((byt=inputStream.read(buff, 3, 2))!= -1){
+            System.out.println(buff);
             System.out.println((char)byt);
         }
+        inputStream.close();
     }
 
     static void readChar(String filePath) throws IOException {
@@ -44,6 +49,7 @@ public class ReadFileTest {
         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
         // 也可以使用缓冲区，避免重复读取
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+        BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
         System.out.println(bufferedReader.readLine());
         int byt = 0;
         char[] temp = new char[200];
@@ -53,7 +59,6 @@ public class ReadFileTest {
     }
 
     public static void main(String[] args) throws IOException {
-//        readByte(FILE_PATH);
-        readChar(FILE_PATH);
+        readChar(FILE_PATH_MAC);
     }
 }

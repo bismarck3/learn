@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class ExerciseDay2 {
 
     static void checkCharAndToUp(char character){
-        if(character>(int)'a' && character<(int)'z'){
+        if(character>='a' && character<='z'){
             PrintUtil.println("该字母是小写,原字母为："+character);
             char toUpChar = (char)(character-('a'-'A'));
             PrintUtil.println("转换为大写之后为："+toUpChar);
@@ -33,8 +33,7 @@ public class ExerciseDay2 {
         }
     }
 
-    static void printStars(){
-        int[] stars = new int[]{1,2,3,4,5,6};
+    static void printStars(int[] stars){
         for(int starNumber : stars){
             String needToPrintItem = "*";
             for(int i = 1; i < starNumber; i++){
@@ -77,6 +76,6 @@ public class ExerciseDay2 {
     }
 
     public static void main(String[] args) {
-        yangHuiTriangle(2);
+        yangHuiTriangle(5);
     }
 }

@@ -60,7 +60,7 @@ public class ClassMethodTest {
         System.out.println(toy instanceof FancyToy );
         System.out.println(Toy.class.isInstance(toy));
         System.out.println(FancyToy.class.isInstance(toy));
-        System.out.println(FancyToy.class.isAssignableFrom(Toy.class));
+        System.out.println(FancyToy.class.isAssignableFrom(FancyToy.class));
         System.out.println(Toy.class.isAssignableFrom(FancyToy.class));
     }
 

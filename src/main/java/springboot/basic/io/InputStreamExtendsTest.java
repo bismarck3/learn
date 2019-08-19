@@ -25,6 +25,8 @@ public class InputStreamExtendsTest {
 
     private static final String FILE_PATH = "C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习\\测试读取文件.txt";
 
+    private static final String FILE_PATH_MAC = "/work/gitRepo/learn/test.txt";
+
     static void readByte(InputStream inputStream) throws IOException {
         int byt = 0;
         while((byt=inputStream.read())!= -1){
@@ -33,13 +35,14 @@ public class InputStreamExtendsTest {
     }
 
     static void byteArrayInputStream() throws IOException {
+        byte[] buff = {57, 56, 57};
         byte[] temp = "abc".getBytes("UTF-8");
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(temp);
+        InputStream byteArrayInputStream = new ByteArrayInputStream(temp);
         readByte(byteArrayInputStream);
     }
 
     static void fileInputStream() throws IOException {
-        File file = new File(FILE_PATH);
+        File file = new File(FILE_PATH_MAC);
         FileInputStream fileInputStream = new FileInputStream(file);
         InputStream inputStream = new FileInputStream(fileInputStream.getFD());
         readByte(inputStream);
@@ -52,7 +55,7 @@ public class InputStreamExtendsTest {
     }
 
     public static void main(String[] args) throws IOException {
-        byteArrayInputStream();
+        fileInputStream();
     }
 
 }

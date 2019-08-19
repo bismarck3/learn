@@ -12,6 +12,8 @@ import springboot.basic.PrintUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -85,7 +87,13 @@ public class TimeUtilsApiTest {
         print(dateFormat(truncateDate));
     }
 
+    static void dateTest(){
+        Date date = new Date();
+        System.out.println(date);
+        System.out.println(DateFormatUtils.format(date, "yyyy-MM-dd"));
+    }
+
     public static void main(String[] args) throws ParseException {
-        timeCeilingTest();
+        dateTest();
     }
 }

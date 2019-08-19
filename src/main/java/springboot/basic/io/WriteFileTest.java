@@ -32,6 +32,8 @@ public class WriteFileTest {
 
     private static final String FILE_PATH_WRITE3 = "C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习\\测试写入合并文件.txt";
 
+    private static final String FILE_PATH_MAC = "/work/gitRepo/learn/test.txt";
+
     static void writeInt(String filePath) throws IOException {
         File file = new File(filePath);
         OutputStream outputStream = new FileOutputStream(file);
@@ -51,7 +53,7 @@ public class WriteFileTest {
         InputStream in1 = new FileInputStream(new File(FILE_PATH_READ1));
         InputStream in2 = new FileInputStream(new File(FILE_PATH_READ2));
         OutputStream ou = new FileOutputStream(new File(FILE_PATH_WRITE3));
-        SequenceInputStream si = new SequenceInputStream(in1, in2);
+        InputStream si = new SequenceInputStream(in1, in2);
         int c = 0;
         while ((c = si.read()) != -1) {
             ou.write(c);
@@ -63,7 +65,6 @@ public class WriteFileTest {
     }
 
     public static void main(String[] args) throws IOException {
-//        writeByte(FILE_PATH);
-        readAndWriteFile();
+        writeInt(FILE_PATH_MAC);
     }
 }

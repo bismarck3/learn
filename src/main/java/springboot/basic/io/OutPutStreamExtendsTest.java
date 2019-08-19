@@ -79,7 +79,6 @@ public class OutPutStreamExtendsTest {
     }
 
     public static void main(String[] args) {
-//        testByteArrayOutputStream();
         threadPipeTest();
     }
 }

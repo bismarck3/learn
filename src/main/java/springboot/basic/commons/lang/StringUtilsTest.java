@@ -68,10 +68,16 @@ public class StringUtilsTest {
     }
 
     static void test(){
-        System.out.println(StringUtils.repeat("a", 2));
+        Integer[] numbers = {1,2,3,4,5,6,7,8,9,10};
+        String join = StringUtils.join(numbers, ",");
+        for (String s : join.split(",")) {
+            System.out.println(s);
+        }
+        String s = "    123sdsad   ";
+        StringUtils.trim(s);
     }
 
     public static void main(String[] args) {
-        testChomp();
+        test();
     }
 }

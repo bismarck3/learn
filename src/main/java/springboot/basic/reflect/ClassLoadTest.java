@@ -27,7 +27,11 @@ public class ClassLoadTest {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(ClassLoadTest.class);
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
+        classLoad();
+    }
+
+    private static void testLoad() {
         System.out.println("main");
         new Candy();
         try {
@@ -40,4 +44,13 @@ public class ClassLoadTest {
         new Cookie();
         System.out.println("after create cookie");
     }
+
+    static void classLoad() throws ClassNotFoundException {
+//        new Candy();
+        Candy candy = new Candy();
+        Class<?> aClass1 = Class.forName("");
+        Class<? extends Candy> aClass = candy.getClass();
+        Class gum = Gum.class;
+    }
+
 }
