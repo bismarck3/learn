@@ -9,6 +9,7 @@ package springboot.basic.io;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -24,6 +25,20 @@ public class FileTest {
 
     private final static String FILE_PARENT_PATH = "C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习";
 
+    static void testCreate() throws IOException {
+        File fileDic = new File(FILE_PARENT_PATH+"\\2019\\8\\12");
+        fileDic.mkdir();
+        fileDic.mkdirs();
+        File fileChild = new File(fileDic, "测试创建文件.txt");
+        fileChild.createNewFile();
+
+    }
+    static void getFile(){
+        File file = new File("C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习\\测试读取文件.txt");
+        System.out.println(file.getName());
+        System.out.println(file.getParent());
+    }
+
     static void getChildFile() throws IOException {
         File parent = new File(FILE_PARENT_PATH);
         File child = new File(parent, "测试文件.txt");
@@ -32,7 +47,11 @@ public class FileTest {
 
     static void getChildrenFilesByFileFilter(){
         File parent = new File(FILE_PARENT_PATH);
-        for(File fil : parent.listFiles(pathName -> StringUtils.endsWith(pathName.getName(), ".txt"))){
+        for(File fil : parent.listFiles(new FileFilter() {
+            @Override public boolean accept(File pathname) {
+                return StringUtils.startsWith(pathname.getName(), "课程");
+            }
+        })){
             System.out.println(fil);
         }
     }
@@ -45,7 +64,7 @@ public class FileTest {
     }
 
     static void createFolder(){
-        File parent = new File("/work/gitRepo/learn");
+        File parent = new File(FILE_PARENT_PATH);
         File child = new File(parent, "测试文件");
         child.mkdir();
     }
@@ -56,8 +75,7 @@ public class FileTest {
         child.mkdirs();
     }
 
-
     public static void main(String[] args) throws IOException, URISyntaxException {
-        createFolder();
+        testCreate();
     }
 }

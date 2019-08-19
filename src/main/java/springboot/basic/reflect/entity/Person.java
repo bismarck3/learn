@@ -1,34 +1,33 @@
 /**
  * @projectName springbootTest
  * @package springboot.basic.reflect.entity
- * @className springboot.basic.reflect.entity.User
+ * @className springboot.basic.reflect.entity.Person
  * @copyright Copyright 2019 Thuisoft, Inc. All rights reserved.
  */
 package springboot.basic.reflect.entity;
 /**
- * User
+ * Person
  *
  * @description 用户
  * @author wangjing
- * @date 2019/7/30 14:51
+ * @date 2019/8/12 17:11
  * @version v1.0.0
  */
-public class User {
+public class Person {
 
     private String name;
 
     private int age;
 
-    public User(){
+    private String address;
+
+    public Person() {
     }
 
-    public User(String name){
-        this.name = name;
-    }
-
-    public User(String name, Integer age){
+    public Person(String name, int age, String address) {
         this.name = name;
         this.age = age;
+        this.address = address;
     }
 
     /**
@@ -59,7 +58,21 @@ public class User {
         this.age = age;
     }
 
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override public String toString() {
-        return "User{" + "name='" + name + '\'' + ", age=" + age + '}';
+        return "Person{" + "name='" + name + '\'' + ", age=" + age + ", address='" + address + '\'' + '}';
     }
 }

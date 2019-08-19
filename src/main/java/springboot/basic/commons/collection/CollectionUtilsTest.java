@@ -10,6 +10,7 @@ import org.apache.commons.collections.Bag;
 import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapIterator;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.bag.HashBag;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.apache.commons.collections.list.FixedSizeList;
@@ -79,6 +80,11 @@ public class CollectionUtilsTest {
     }
 
     static void testFilter(){
+        CollectionUtils.filter(numberSet, new Predicate() {
+            @Override public boolean evaluate(Object object) {
+                return ((Integer)object) > 60;
+            }
+        });
         CollectionUtils.filter(numberSet, number -> (Integer)number > 5);
         numberSet.forEach(System.out::println);
     }
@@ -159,6 +165,6 @@ public class CollectionUtilsTest {
 
 
     public static void main(String[] args) {
-        testHashedMap();
+        testCardinality();
     }
 }
