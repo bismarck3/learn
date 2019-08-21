@@ -81,6 +81,9 @@ class FileNameUtilsTest{
         System.out.println(FilenameUtils.separatorsToSystem(FILE_WHOLE));
     }
 
+    public static void main(String[] args) {
+        testGetPathNoEndSeparator();
+    }
 }
 
 
@@ -140,7 +143,7 @@ class FileUtilsTest{
     static void testListFiles(){
         File fileDirectory = new File(FilenameUtils.getFullPath(FILE_WHOLE));
         for (File listFile : FileUtils
-            .listFiles(fileDirectory, new String[] {".txt"}, true)) {
+            .listFiles(fileDirectory, new String[] {"txt"}, true)) {
             System.out.println(listFile);
         }
     }

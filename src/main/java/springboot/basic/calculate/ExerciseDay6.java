@@ -138,6 +138,6 @@ public class ExerciseDay6 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        testCountFromFile();
+
     }
 }
