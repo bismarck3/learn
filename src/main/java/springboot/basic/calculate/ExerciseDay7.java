@@ -115,7 +115,7 @@ public class ExerciseDay7 {
 
 
     public static void main(String[] args) throws InterruptedException {
-        producerAndConsumer();
+        runMainAndSub();
     }
 
 }
