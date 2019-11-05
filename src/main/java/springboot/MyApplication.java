@@ -2,6 +2,7 @@ package springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -16,14 +17,12 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @version
  */
 @EnableCaching
-@SpringBootApplication
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableJpaRepositories
 @EnableAspectJAutoProxy
 public class MyApplication {
 
 	public static void main(String[] args) {
-
-
 		SpringApplication.run(MyApplication.class, args);
 	}
 
