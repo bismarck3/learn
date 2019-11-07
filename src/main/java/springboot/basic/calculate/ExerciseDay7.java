@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.Semaphore;
 
 /**
  * ExerciseDay7
@@ -26,11 +27,13 @@ import java.util.concurrent.Callable;
 public class ExerciseDay7 {
 
     static void caculatorFactorial() throws InterruptedException {
-        CalculatorThead thread = new CalculatorThead(1,10000);
-        CalculatorThead thread2 = new CalculatorThead(10001,20000);
-        CalculatorThead thread3 = new CalculatorThead(20001,30000);
-        CalculatorThead thread4 = new CalculatorThead(30001,40000);
-        CalculatorThead thread5 = new CalculatorThead(40001,50000);
+
+        long start = System.currentTimeMillis();
+        CalculatorThead thread = new CalculatorThead(1, 20000);
+        CalculatorThead thread2 = new CalculatorThead(20001,40000);
+        CalculatorThead thread3 = new CalculatorThead(40001,60000);
+        CalculatorThead thread4 = new CalculatorThead(60001,80000);
+        CalculatorThead thread5 = new CalculatorThead(80001,100000);
 
         thread.start();
         thread2.start();
@@ -47,6 +50,7 @@ public class ExerciseDay7 {
         BigDecimal result = thread.getResult().multiply(thread2.getResult()).multiply(thread3.getResult())
             .multiply(thread4.getResult()).multiply(thread5.getResult());
 
+        System.out.println(result);
         String resultString = result.toString();
         char[] chars = resultString.toCharArray();
         int charsSum = 0;
@@ -55,44 +59,24 @@ public class ExerciseDay7 {
         }
 
         System.out.println(charsSum);
+        long end = System.currentTimeMillis();
+        System.out.println((end - start) / 1000);
     }
 
     static void producerAndConsumer(){
-        Production production = new Production(20);
+        Production production = new Production(20, 0, new Object());
         Consumer consumerRunnable = new Consumer(production);
-        Consumer consumerRunnable2 = new Consumer(production);
-        Consumer consumerRunnable3 = new Consumer(production);
-        Consumer consumerRunnable4 = new Consumer(production);
-        Consumer consumerRunnable5 = new Consumer(production);
         Producer producerRunnable = new Producer(production);
-        Producer producerRunnable2 = new Producer(production);
-        Producer producerRunnable3 = new Producer(production);
-        Producer producerRunnable4 = new Producer(production);
-        Producer producerRunnable5 = new Producer(production);
-        Thread consumer = new Thread(consumerRunnable);
-        Thread consumer2 = new Thread(consumerRunnable2);
-        Thread consumer3 = new Thread(consumerRunnable3);
-        Thread consumer4 = new Thread(consumerRunnable4);
-        Thread consumer5 = new Thread(consumerRunnable5);
 
+        for(int i = 0; i < 5; i++){
+            Thread consumer = new Thread(consumerRunnable, "消费者线程"+i);
+            consumer.start();
+        }
 
-        Thread producer = new Thread(producerRunnable);
-        Thread producer2 = new Thread(producerRunnable2);
-        Thread producer3 = new Thread(producerRunnable3);
-        Thread producer4 = new Thread(producerRunnable4);
-        Thread producer5 = new Thread(producerRunnable5);
-
-        consumer.start();
-        consumer2.start();
-        consumer3.start();
-        consumer4.start();
-        consumer5.start();
-
-        producer.start();
-        producer2.start();
-        producer3.start();
-        producer4.start();
-        producer5.start();
+        for(int i =0; i < 5; i++){
+            Thread producer = new Thread(producerRunnable, "生产者线程"+i);
+            producer.start();
+        }
     }
 
 

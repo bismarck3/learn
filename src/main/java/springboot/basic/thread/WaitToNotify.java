@@ -50,7 +50,7 @@ class Producer extends Thread {
     public void run() {
         synchronized (lock) {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -64,9 +64,8 @@ public class WaitToNotify {
 
     public static void main(String[] args) {
         Object lock = new Object();
-        Object lock2 = new Object();
         Consummer consummer = new Consummer(lock, "消费线程");
-        Producer producer = new Producer(lock2, "生产线程");
+        Producer producer = new Producer(lock, "生产线程");
         consummer.start();
         producer.start();
     }

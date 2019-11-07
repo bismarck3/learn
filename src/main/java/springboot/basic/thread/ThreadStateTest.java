@@ -6,6 +6,8 @@
  */
 package springboot.basic.thread;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 /**
  * ThreadStateTest
  *
@@ -16,6 +18,19 @@ package springboot.basic.thread;
  */
 
 public class ThreadStateTest {
+
+    private Object obj;
+
+    void test(){
+        //
+        //
+        //
+        synchronized (obj){
+            
+        }
+        //
+        //
+    }
 
     static Thread getThread() {
         Thread thread = new Thread(new Runnable() {
@@ -37,13 +52,36 @@ public class ThreadStateTest {
 
     public static void main(String[] args) {
         Thread thread = getThread();
+        ThreadStateTest threadStateTest = new ThreadStateTest();
+        ThreadStateTest threadStateTest2 = new ThreadStateTest();
+
+        threadStateTest.test();
+        threadStateTest2.test();
         thread.start();
             try {
-            Thread.sleep(500);
+            Thread.sleep(100);
             thread.interrupt();
             System.out.println(thread.isInterrupted());
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+}
+
+
+class Runnabele3 implements Runnable{
+
+    ThreadLocal<Boolean> flag;
+
+    @Override
+    public void run() {
+        while(true){
+            if(flag.get()){
+                System.out.println("true");
+            }else{
+                System.out.println("false");
+            }
+            flag.set(!flag.get());
         }
     }
 }

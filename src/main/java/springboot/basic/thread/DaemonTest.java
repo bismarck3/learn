@@ -15,10 +15,15 @@ package springboot.basic.thread;
  */
 public class DaemonTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(new Runnable() {
             @Override public void run() {
                 for(int i = 0; i < 5; i++){
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println(Thread.currentThread().getName()+"："+i);
                 }
             }
@@ -26,12 +31,25 @@ public class DaemonTest {
         Thread daemonThread = new Thread(new Runnable() {
             @Override public void run() {
                 while(true){
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("我是后台线程");
                 }
             }
         },"后台线程");
-        daemonThread.setDaemon(true);
-        daemonThread.start();
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i =0 ; i < 5; i++){
+                    System.out.println(Thread.currentThread().getName()+"："+i);
+                }
+            }
+        },"线程2");
         thread.start();
+        thread2.start();
     }
 }

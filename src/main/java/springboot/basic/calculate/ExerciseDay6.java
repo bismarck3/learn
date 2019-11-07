@@ -6,6 +6,8 @@
  */
 package springboot.basic.calculate;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -29,6 +31,7 @@ public class ExerciseDay6 {
     private static final String READED_FILE_INFO = "C:\\Users\\lenovo\\Desktop\\技术交流\\电子科技大学实习\\读取文件信息.txt";
 
     static void filCommonOperation(){
+
         File file=new File("D:","HelloWorld.txt");
         try {
             if (file.createNewFile()) {
@@ -77,10 +80,10 @@ public class ExerciseDay6 {
         }
     }
 
-    static void getAllJavaInThisWorkSpace(){
+    static void getAllJavaInThisWorkSpace(String suffix){
         List<File>list=testListFiles(".");
         for (File file : list) {
-            if (file.toString().endsWith(".java")) {
+            if (file.toString().endsWith(suffix)) {
                 System.out.println(file.getName());
             }
         }
@@ -138,6 +141,6 @@ public class ExerciseDay6 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        testCountFromFile();
+        getAllJavaInThisWorkSpace(".java");
     }
 }

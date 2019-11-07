@@ -25,11 +25,11 @@ public class RunnableToExtend {
     }
 
     static void testRunnable(){
-        MyRunnableThread myRunnableThread = new MyRunnableThread("售票线程");
+        MyRunnableThread myRunnableThread = new MyRunnableThread();
 
-        Thread thread = new Thread(myRunnableThread);
-        Thread thread2 = new Thread(myRunnableThread);
-        Thread thread3 = new Thread(myRunnableThread);
+        Thread thread = new Thread(myRunnableThread, "售票线程1");
+        Thread thread2 = new Thread(myRunnableThread, "售票线程2");
+        Thread thread3 = new Thread(myRunnableThread, "售票线程3");
         thread.start();
         thread2.start();
         thread3.start();
@@ -45,14 +45,8 @@ class MyRunnableThread implements Runnable{
 
     private int ticket = 100;
 
-    private String name;
-
-    public MyRunnableThread(String name) {
-        this.name = name;
-    }
-
     @Override public void run() {
-        while(ticket >0){
+        while(ticket > 0){
             ticket--;
             System.out.println(Thread.currentThread().getName()+"-ticket："+ticket);
         }
@@ -70,7 +64,7 @@ class MyExtendThread extends Thread{
     }
 
     @Override public void run() {
-        while(ticket >0){
+        while(ticket > 0){
             ticket--;
             System.out.println(Thread.currentThread().getName()+"-ticket："+ticket);
         }
