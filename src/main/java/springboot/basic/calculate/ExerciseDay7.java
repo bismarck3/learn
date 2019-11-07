@@ -9,6 +9,8 @@ package springboot.basic.calculate;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
+import springboot.basic.calculate.sync.ThreadRunCount;
+import springboot.basic.calculate.sync.ThreadRunCountSynchro;
 
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -79,10 +81,25 @@ public class ExerciseDay7 {
         }
     }
 
+    static void runMainAndSub(){
+        final ThreadRunCount f2 = new ThreadRunCountSynchro();
+
+        // 子线程循环3次
+        new Thread(() -> {
+            for(int i=0;i<3;i++){
+                f2.subFunction();
+            }
+        }).start();
+
+        // 主线程循环3次
+        for(int i=0;i<3;i++){
+            f2.mainFunction();
+        }
+    }
 
 
     public static void main(String[] args) throws InterruptedException {
-        producerAndConsumer();
+        runMainAndSub();
     }
 
 }
