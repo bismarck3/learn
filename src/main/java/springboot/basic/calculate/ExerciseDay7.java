@@ -6,11 +6,17 @@
  */
 package springboot.basic.calculate;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.Converter;
 import springboot.basic.calculate.sync.ThreadRunCount;
 import springboot.basic.calculate.sync.ThreadRunCountSynchro;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Semaphore;
 
 /**
  * ExerciseDay7
@@ -22,64 +28,57 @@ import java.math.BigInteger;
  */
 public class ExerciseDay7 {
 
-    static void calculateFactorial() throws InterruptedException {
-        long start = System.currentTimeMillis();
+    static void caculatorFactorial() throws InterruptedException {
 
-        int[] numbers = {0, 10000, 20000, 30000, 40000, 50000};
-        BigInteger result = new BigInteger(1+"");
-        for (int i = 0; i < numbers.length-1; i++) {
-            CalculatorThead thread = new CalculatorThead(numbers[i]+1, numbers[i+1]);
-            thread.start();
-            thread.join();
-            result = result.multiply(thread.getResult());
-        }
-        char[] chars = result.toString().toCharArray();
+        long start = System.currentTimeMillis();
+        CalculatorThead thread = new CalculatorThead(1, 20000);
+        CalculatorThead thread2 = new CalculatorThead(20001,40000);
+        CalculatorThead thread3 = new CalculatorThead(40001,60000);
+        CalculatorThead thread4 = new CalculatorThead(60001,80000);
+        CalculatorThead thread5 = new CalculatorThead(80001,100000);
+
+        thread.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
+
+        thread.join();
+        thread2.join();
+        thread3.join();
+        thread4.join();
+        thread5.join();
+
+        BigDecimal result = thread.getResult().multiply(thread2.getResult()).multiply(thread3.getResult())
+            .multiply(thread4.getResult()).multiply(thread5.getResult());
+
+        System.out.println(result);
+        String resultString = result.toString();
+        char[] chars = resultString.toCharArray();
         int charsSum = 0;
         for (char c : chars) {
             charsSum += c-'0';
         }
-        System.out.println(charsSum);
 
+        System.out.println(charsSum);
         long end = System.currentTimeMillis();
-        System.out.println(end - start);
+        System.out.println((end - start) / 1000);
     }
 
     static void producerAndConsumer(){
-        Production production = new Production(20);
+        Production production = new Production(20, 0, new Object());
         Consumer consumerRunnable = new Consumer(production);
-        Consumer consumerRunnable2 = new Consumer(production);
-        Consumer consumerRunnable3 = new Consumer(production);
-        Consumer consumerRunnable4 = new Consumer(production);
-        Consumer consumerRunnable5 = new Consumer(production);
         Producer producerRunnable = new Producer(production);
-        Producer producerRunnable2 = new Producer(production);
-        Producer producerRunnable3 = new Producer(production);
-        Producer producerRunnable4 = new Producer(production);
-        Producer producerRunnable5 = new Producer(production);
-        Thread consumer = new Thread(consumerRunnable);
-        Thread consumer2 = new Thread(consumerRunnable2);
-        Thread consumer3 = new Thread(consumerRunnable3);
-        Thread consumer4 = new Thread(consumerRunnable4);
-        Thread consumer5 = new Thread(consumerRunnable5);
 
+        for(int i = 0; i < 5; i++){
+            Thread consumer = new Thread(consumerRunnable, "消费者线程"+i);
+            consumer.start();
+        }
 
-        Thread producer = new Thread(producerRunnable);
-        Thread producer2 = new Thread(producerRunnable2);
-        Thread producer3 = new Thread(producerRunnable3);
-        Thread producer4 = new Thread(producerRunnable4);
-        Thread producer5 = new Thread(producerRunnable5);
-
-        consumer.start();
-        consumer2.start();
-        consumer3.start();
-        consumer4.start();
-        consumer5.start();
-
-        producer.start();
-        producer2.start();
-        producer3.start();
-        producer4.start();
-        producer5.start();
+        for(int i =0; i < 5; i++){
+            Thread producer = new Thread(producerRunnable, "生产者线程"+i);
+            producer.start();
+        }
     }
 
     static void runMainAndSub(){
@@ -100,7 +99,7 @@ public class ExerciseDay7 {
 
 
     public static void main(String[] args) throws InterruptedException {
-        calculateFactorial();
+        runMainAndSub();
     }
 
 }
@@ -139,21 +138,21 @@ class CalculatorThead extends Thread{
 
     private int end;
 
-    private volatile BigInteger result = new BigInteger(1+"");
+    private volatile BigDecimal result = new BigDecimal(1);
 
     public CalculatorThead(int start, int end) {
         this.start = start;
         this.end = end;
     }
 
-    public BigInteger getResult() {
+    public BigDecimal getResult() {
         return result;
     }
 
 
     @Override public void run() {
         while(start <= end){
-            result = result.multiply(new BigInteger(start+""));
+            result = result.multiply(new BigDecimal(start));
             start++;
         }
     }

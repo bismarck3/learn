@@ -60,9 +60,9 @@ class MyDeadRunnable2 implements Runnable{
     }
 
     @Override public void run() {
-        synchronized (lock2){
+        synchronized (lock){
             System.out.println(Thread.currentThread().getName()+"——进入lock2的临界区");
-            synchronized (lock){
+            synchronized (lock2){
                 System.out.println(Thread.currentThread().getName()+"——进入lock1的临界区");
             }
         }

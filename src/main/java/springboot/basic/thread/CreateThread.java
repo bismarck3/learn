@@ -16,7 +16,7 @@ package springboot.basic.thread;
  */
 public class CreateThread {
 
-    public static void main(String[] args) {
+    static void createThread(){
         Thread thread = new Thread();
         System.out.println(thread);
         thread.start();
@@ -33,8 +33,20 @@ public class CreateThread {
 
         Thread thread3 = new MyThread();
         thread3.start();
+
+    }
+    public static void main(String[] args) {
+        createThread();
     }
 
+}
+
+class MyRunnable2 implements Runnable{
+
+    @Override
+    public void run() {
+        System.out.println("runnable");
+    }
 }
 
 class MyThread extends Thread {

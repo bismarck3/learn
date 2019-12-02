@@ -153,6 +153,8 @@ public class CollectionUtilsTest {
     }
 
     static void testHashedMap(){
+        Map<String, String> map = new HashMap<>();
+
         HashedMap hashedMap = new HashedMap();
         hashedMap.put("1", "a");
         hashedMap.put("2", "b");
