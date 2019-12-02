@@ -6,16 +6,11 @@
  */
 package springboot.basic.calculate;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.Converter;
 import springboot.basic.calculate.sync.ThreadRunCount;
 import springboot.basic.calculate.sync.ThreadRunCountSynchro;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.Callable;
+import java.math.BigInteger;
 
 /**
  * ExerciseDay7
@@ -27,36 +22,26 @@ import java.util.concurrent.Callable;
  */
 public class ExerciseDay7 {
 
-    static void caculatorFactorial() throws InterruptedException {
-        CalculatorThead thread = new CalculatorThead(1,10000);
-        CalculatorThead thread2 = new CalculatorThead(10001,20000);
-        CalculatorThead thread3 = new CalculatorThead(20001,30000);
-        CalculatorThead thread4 = new CalculatorThead(30001,40000);
-        CalculatorThead thread5 = new CalculatorThead(40001,50000);
+    static void calculateFactorial() throws InterruptedException {
+        long start = System.currentTimeMillis();
 
-        thread.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
-        thread5.start();
-
-        thread.join();
-        thread2.join();
-        thread3.join();
-        thread4.join();
-        thread5.join();
-
-        BigDecimal result = thread.getResult().multiply(thread2.getResult()).multiply(thread3.getResult())
-            .multiply(thread4.getResult()).multiply(thread5.getResult());
-
-        String resultString = result.toString();
-        char[] chars = resultString.toCharArray();
+        int[] numbers = {0, 10000, 20000, 30000, 40000, 50000};
+        BigInteger result = new BigInteger(1+"");
+        for (int i = 0; i < numbers.length-1; i++) {
+            CalculatorThead thread = new CalculatorThead(numbers[i]+1, numbers[i+1]);
+            thread.start();
+            thread.join();
+            result = result.multiply(thread.getResult());
+        }
+        char[] chars = result.toString().toCharArray();
         int charsSum = 0;
         for (char c : chars) {
             charsSum += c-'0';
         }
-
         System.out.println(charsSum);
+
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
     }
 
     static void producerAndConsumer(){
@@ -115,7 +100,7 @@ public class ExerciseDay7 {
 
 
     public static void main(String[] args) throws InterruptedException {
-        runMainAndSub();
+        calculateFactorial();
     }
 
 }
@@ -154,21 +139,21 @@ class CalculatorThead extends Thread{
 
     private int end;
 
-    private volatile BigDecimal result = new BigDecimal(1);
+    private volatile BigInteger result = new BigInteger(1+"");
 
     public CalculatorThead(int start, int end) {
         this.start = start;
         this.end = end;
     }
 
-    public BigDecimal getResult() {
+    public BigInteger getResult() {
         return result;
     }
 
 
     @Override public void run() {
         while(start <= end){
-            result = result.multiply(new BigDecimal(start));
+            result = result.multiply(new BigInteger(start+""));
             start++;
         }
     }

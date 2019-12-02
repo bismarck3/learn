@@ -26,16 +26,16 @@ public class Demo {
 
     public static void main(String[] args) {
         final Demo demo = new Demo();
-//        Thread thread1 = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    staticFunction();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    staticFunction();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         Thread thread2 = new Thread(new Runnable() {
             @Override
@@ -59,7 +59,7 @@ public class Demo {
             }
         });
 
-//        thread1.start();
+        thread1.start();
         thread2.start();
         thread3.start();
     }
