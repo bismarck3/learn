@@ -8,7 +8,6 @@ package springboot.learn.complatefuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -21,14 +20,24 @@ import java.util.concurrent.TimeoutException;
  */
 public class Main {
 
+
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
 //        runAsync();
 //        supplyAsync();
 //        then();
+//        thenRun();
 //        thenCombine();
+//        afterBoth();
 //        exceptionally();
-        whenComplete();
+//        whenComplete();
 //        handle();
+        test();
+    }
+
+    static void test(){
+        Void join = CompletableFuture.runAsync(() -> {
+        }).join();
+        System.out.println(join);
     }
 
     static void handle() {
@@ -38,16 +47,16 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            //出现异常
-//            if (1 == 1) {
-//                throw new RuntimeException("测试一下异常情况");
-//            }
+            //出现异常
+            if (1 == 1) {
+                throw new RuntimeException("测试一下异常情况");
+            }
             return "s1";
-        }).handle((s, t) -> {
-            if (t != null) {
+        }).handle((data, throwable) -> {
+            if (throwable != null) {
                 return "hello world";
             }
-            return s;
+            return "handle"+data;
         }).join();
         System.out.println(result);
     }
@@ -60,9 +69,9 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-//            if (1 == 1) {
-//                throw new RuntimeException("测试一下异常情况");
-//            }
+            if (1 == 1) {
+                throw new RuntimeException("测试一下异常情况");
+            }
             return "s1";
         }).whenComplete((s, t) -> {
             System.out.println(s);
@@ -79,6 +88,12 @@ public class Main {
     }
 
     static void exceptionally() {
+        exceptionllyFailure();
+        System.out.println("-----------");
+        exceptionallySuccess();
+    }
+
+    private static void exceptionllyFailure() {
         String result = CompletableFuture.supplyAsync(() -> {
             try {
                 Thread.sleep(3000);
@@ -87,6 +102,21 @@ public class Main {
             }
             if (1 == 1) {
                 throw new RuntimeException("测试一下异常情况");
+            }
+            return "s1";
+        }).exceptionally(e -> {
+            System.out.println(e.getMessage());
+            return "hello world";
+        }).join();
+        System.out.println(result);
+    }
+
+    private static void exceptionallySuccess() {
+        String result = CompletableFuture.supplyAsync(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             return "s1";
         }).exceptionally(e -> {
@@ -125,9 +155,32 @@ public class Main {
         System.out.println("执行完毕\t："+(end-start));
     }
 
-    static void then() throws InterruptedException {
+    static void afterBoth(){
         long start = System.currentTimeMillis();
-        CompletableFuture.supplyAsync(() -> {
+        CompletableFuture.runAsync(() -> {
+            try {
+                System.out.println("thread1");
+                Thread.sleep(3000);
+                System.out.println("thread1执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).runAfterBoth(CompletableFuture.runAsync(() -> {
+            try {
+                System.out.println("thread2");
+                Thread.sleep(3000);
+                System.out.println("thread2执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }), () ->  System.out.println("两个任务都执行完毕了"))
+            .thenAccept(System.out::println).join();
+        long end = System.currentTimeMillis();
+        System.out.println("执行完毕\t："+(end-start));
+    }
+
+    static void then() {
+        CompletableFuture<Integer> supplyAsync = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("thread1");
                 Thread.sleep(3000);
@@ -136,22 +189,97 @@ public class Main {
                 e.printStackTrace();
             }
             return 1;
-        }).thenApplyAsync(a -> {
+        });
+        supplyAsync.thenApply(a -> {
             try {
-                System.out.println("thread2");
+                System.out.println("进入thread2");
                 Thread.sleep(3000);
                 System.out.println("thread2执行完毕\t:"+a);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             return ++a;
-        }).thenAccept(System.out::println);
-        long end = System.currentTimeMillis();
-        Thread.sleep(100);
-        System.out.println("执行完毕\t："+(end-start));
+        });
+        supplyAsync.thenApply(number -> {
+            try {
+                System.out.println("进入thread3");
+                Thread.sleep(3000);
+                System.out.println("thread3执行完毕\t:"+number);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return ++number;
+        });
+        supplyAsync.thenAccept(number -> {
+            try {
+                System.out.println("进入thread4");
+                Thread.sleep(3000);
+                System.out.println("thread4执行完毕\t:"+number);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        while(true){
+
+        }
+    }
+
+    static void thenRun(){
+        CompletableFuture<Integer> supplyAsync = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("thread1");
+                Thread.sleep(3000);
+                System.out.println("thread1执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return 1;
+        });
+        supplyAsync.thenRun(() -> {
+            try {
+                System.out.println("进入thread2");
+                Thread.sleep(3000);
+                System.out.println("thread2执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        supplyAsync.thenRun(() -> {
+            try {
+                System.out.println("进入thread3");
+                Thread.sleep(3000);
+                System.out.println("thread3执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        supplyAsync.thenRun(() -> {
+            try {
+                System.out.println("进入thread4");
+                Thread.sleep(3000);
+                System.out.println("thread4执行完毕:");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        while(true){
+
+        }
     }
 
     static void supplyAsync() {
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("thread");
+                Thread.sleep(3000);
+                System.out.println("thread执行完毕");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "running";
+        });
+        System.out.println("执行完毕");
+
         String value = CompletableFuture.supplyAsync(() -> {
             try {
                 System.out.println("thread");
@@ -166,19 +294,23 @@ public class Main {
     }
 
     static void runAsync() {
-        CompletableFuture.runAsync(() -> {
-            try {
-                System.out.println("thread");
-                Thread.sleep(3000);
-                System.out.println("thread执行完毕");
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).join();
+        try {
+            CompletableFuture.runAsync(() -> {
+                try {
+                    System.out.println("thread");
+                    Thread.sleep(3000);
+                    System.out.println("thread执行完毕");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
         System.out.println("执行完毕");
     }
 
-    static void anyOfAndAllOf() throws ExecutionException, InterruptedException {
+    static void anyOfAndAllOf(){
         CompletableFuture.allOf(CompletableFuture.runAsync(() -> {
             try {
                 System.out.println("thread1");
@@ -195,7 +327,7 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        })).get();
+        })).join();
         System.out.println("所有线程执行完毕");
     }
 

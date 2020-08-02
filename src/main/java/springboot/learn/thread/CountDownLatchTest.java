@@ -19,7 +19,42 @@ import java.util.concurrent.CountDownLatch;
  */
 public class CountDownLatchTest {
 
+    static void order(){
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        CountDownLatch countDownLatch1 = new CountDownLatch(1);
+        new Thread(() -> {
+            while(true){
+                countDownLatch.countDown();
+                try {
+                    countDownLatch.await();
+                    System.out.println(Thread.currentThread().getName());
+                    countDownLatch1.countDown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            while(true){
+                countDownLatch1.countDown();
+                try {
+                    countDownLatch1.await();
+                    System.out.println(Thread.currentThread().getName());
+                    countDownLatch.countDown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
     public static void main(String[] args) {
+        order();
+    }
+
+
+    static void test(){
         CountDownLatch countDownLatch = new CountDownLatch(3);
         MyRunnble myRunnable = new MyRunnble(countDownLatch);
         Thread thread = new Thread(myRunnable);

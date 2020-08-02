@@ -22,11 +22,24 @@ public class Demo {
 
     }
 
-    public synchronized void function() throws InterruptedException {
+    public void function() throws InterruptedException {
+        synchronized(this) {
+            for (int i = 0; i < 3; i++) {
+                Thread.sleep(1000);
+                System.out.println("function running..."+Thread.currentThread().getName());
+                this.wait();
+                System.out.println(Thread.currentThread().getName() + "阻塞结束");
+            }
+        }
+
+    }
+
+    public synchronized void function2() throws InterruptedException {
 
         for (int i = 0; i < 3; i++) {
             Thread.sleep(1000);
             System.out.println("function running..."+Thread.currentThread().getName());
+            this.notifyAll();
         }
 
     }
@@ -51,44 +64,21 @@ public class Demo {
 
     public static void main(String[] args) {
         final Demo demo = new Demo();
-//        Thread thread1 = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    staticFunction();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-
-        Thread thread2 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-//                    demo.listFunction();
-                    demo.staticFunction();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        new Thread(() -> {
+            try {
+                demo.function();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        });
-        
-        Thread thread3 = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-//                    Demo.staticFunction();
-//                    demo.listFunction();
-//                    Demo.listStaticFunction();
-                    demo.function();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        }).start();
 
-        thread2.start();
-        thread3.start();
+        new Thread(() -> {
+            try {
+                demo.function2();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 }

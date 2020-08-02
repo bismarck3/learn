@@ -30,7 +30,6 @@ public class ExerciseDay7 {
 
     static void caculatorFactorial() throws InterruptedException {
 
-        long start = System.currentTimeMillis();
         CalculatorThead thread = new CalculatorThead(1, 20000);
         CalculatorThead thread2 = new CalculatorThead(20001,40000);
         CalculatorThead thread3 = new CalculatorThead(40001,60000);
@@ -52,7 +51,6 @@ public class ExerciseDay7 {
         BigDecimal result = thread.getResult().multiply(thread2.getResult()).multiply(thread3.getResult())
             .multiply(thread4.getResult()).multiply(thread5.getResult());
 
-        System.out.println(result);
         String resultString = result.toString();
         char[] chars = resultString.toCharArray();
         int charsSum = 0;
@@ -62,7 +60,6 @@ public class ExerciseDay7 {
 
         System.out.println(charsSum);
         long end = System.currentTimeMillis();
-        System.out.println((end - start) / 1000);
     }
 
     static void producerAndConsumer(){
@@ -99,7 +96,7 @@ public class ExerciseDay7 {
 
 
     public static void main(String[] args) throws InterruptedException {
-        runMainAndSub();
+        caculatorFactorial();
     }
 
 }
@@ -138,7 +135,7 @@ class CalculatorThead extends Thread{
 
     private int end;
 
-    private volatile BigDecimal result = new BigDecimal(1);
+    private BigDecimal result = new BigDecimal(1);
 
     public CalculatorThead(int start, int end) {
         this.start = start;

@@ -18,7 +18,11 @@ import java.util.concurrent.Semaphore;
  */
 public class SemaphoreTest {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        test();
+    }
+
+    static void test(){
         Semaphore semaphore = new Semaphore(2);
         MyRunnable myRunnable = new MyRunnable(semaphore);
         Thread thread = new Thread(myRunnable);

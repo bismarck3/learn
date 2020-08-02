@@ -120,7 +120,6 @@ public class ExerciseDay6 {
     static void testCopyResource(){
         File fileFrom = new File("C:\\Users\\lenovo\\Desktop\\markdownPictrue\\一次request请求.png");
         File fileTo = new File("D:\\picture.jpg");
-
         try(FileInputStream fis = new FileInputStream(fileFrom);
             FileOutputStream fos = new FileOutputStream(fileTo)) {
             int len;
