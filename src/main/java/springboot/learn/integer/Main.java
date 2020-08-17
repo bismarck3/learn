@@ -15,6 +15,25 @@ package springboot.learn.integer;
  */
 public class Main {
 
+    private static void one(){
+        long i = 5L;
+        Long j = new Long(5);
+
+        int integer = 3;
+
+        int integer1 = 2;
+
+        System.out.println(i == (integer + integer1));
+    }
+
+    private static void tow(){
+        boolean b = new Boolean(true);
+        Boolean a = true;
+
+        System.out.println(b == a);
+
+    }
+
     private static void five() {
 //        Integer i = new Integer(555);
 //        Integer j = new Integer(555);
@@ -36,7 +55,7 @@ public class Main {
     }
 
     public static void main(String[] args){
-        five();
+        tow();
 
     }
 
