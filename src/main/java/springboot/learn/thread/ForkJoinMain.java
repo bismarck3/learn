@@ -6,6 +6,7 @@
  */
 package springboot.learn.thread;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
@@ -20,54 +21,60 @@ import java.util.concurrent.RecursiveTask;
  * @date 2020/8/18 23:14
  * @version v1.0.0
  */
-public class ForKJoinMain extends RecursiveTask<Long> {
+public class ForkJoinMain extends RecursiveTask<BigDecimal> {
 
     private static final int THRESHOLD = 10000;
 
-    private long start;
+    private final long start;
 
-    private long end;
+    private final long end;
 
-    public ForKJoinMain(long start, long end) {
+    public ForkJoinMain(long start, long end) {
         this.start = start;
         this.end = end;
     }
 
-
     @Override
-    protected Long compute() {
-        long sum = 0;
+    protected BigDecimal compute() {
+        BigDecimal sum = BigDecimal.ONE;
         boolean canCompute = (end - start) < THRESHOLD;
         if (canCompute) {
             for (long i = start; i <= end; i++) {
-                sum += i;
+                sum = sum.multiply(new BigDecimal(i));
             }
         } else {
             long step = (start + end ) / 100;
-            ArrayList<ForKJoinMain> subTasks = new ArrayList<>();
+            ArrayList<ForkJoinMain> subTasks = new ArrayList<>();
             long pos = start;
-            for(int i = 0; i < 100; i++){
+            for(int i = 1; i <= 100; i++){
                 long lastOne = pos + step;
                 if(lastOne > end){
                     lastOne = end;
                 }
-                ForKJoinMain forKJoinMain = new ForKJoinMain(pos, lastOne);
+                ForkJoinMain forkJoinMain = new ForkJoinMain(pos, lastOne);
                 pos+=step+1;
-                subTasks.add(forKJoinMain);
-                forKJoinMain.fork();
+                subTasks.add(forkJoinMain);
+                forkJoinMain.fork();
             }
-            for (ForKJoinMain subTask : subTasks) {
-                sum += subTask.join();
+            for (ForkJoinMain subTask : subTasks) {
+                sum = sum.multiply(subTask.join());
             }
         }
         return sum;
     }
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
+        long start = System.currentTimeMillis();
         ForkJoinPool forkJoinPool = new ForkJoinPool();
-        ForKJoinMain forKJoinMain = new ForKJoinMain(0, 200000L);
-        ForkJoinTask<Long> longForkJoinTask = forkJoinPool.submit(forKJoinMain);
-        Long number = longForkJoinTask.get();
-        System.out.println(number);
+        ForkJoinMain forkJoinMain = new ForkJoinMain(1, 50000);
+        ForkJoinTask<BigDecimal> longForkJoinTask = forkJoinPool.submit(forkJoinMain);
+        BigDecimal number = longForkJoinTask.get();
+        int charsSum = 0;
+        for (char c : number.toString().toCharArray()) {
+            charsSum += c - '0';
+        }
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
+        System.out.println(charsSum);
     }
 }
