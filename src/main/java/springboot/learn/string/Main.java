@@ -5,6 +5,9 @@
  * @copyright Copyright 2020 Thuisoft, Inc. All rights reserved.
  */
 package springboot.learn.string;
+
+import java.util.Arrays;
+
 /**
  * Main
  *
@@ -23,9 +26,9 @@ public class Main {
         System.out.println(str1 == str2);
 
         String str3 = new String("2") + new String("2");
-        String intern = str3.intern();
+//        String intern = str3.intern();
         String str4 = "22";
-        System.out.println(str3 == intern);
+//        System.out.println(str3 == intern);
         System.out.println(str3 == str4);
     }
 
@@ -76,6 +79,12 @@ public class Main {
         System.out.println(s1 == s2);
         System.out.println(s2 == s3);
         System.out.println(s1 == s3);
+    }
+
+    private static void six(){
+        String[] s1 = {"a", "b"};
+        String[] s2 = Arrays.copyOfRange(s1, 0, s1.length);
+        System.out.println(s1 == s2);
     }
 
     public static void main(String[] args) {

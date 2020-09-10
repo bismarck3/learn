@@ -17,67 +17,19 @@ package springboot.basic.thread;
 public class ThreadLocalTest {
 
     public static void main(String[] args) {
-        FlagCheckThreadLocalRunnable flagCheck = new FlagCheckThreadLocalRunnable();
-        Thread thread = new Thread(flagCheck);
-        Thread thread2 = new Thread(flagCheck);
-        Thread thread3 = new Thread(flagCheck);
-        Thread thread4 = new Thread(flagCheck);
-        thread.start();
-        thread2.start();
-        thread3.start();
-        thread4.start();
-    }
-}
-
-
-class FlagCheckRunnable implements Runnable{
-
-    private boolean flag = true;
-
-    public FlagCheckRunnable() {
-    }
-
-    public FlagCheckRunnable(boolean flag) {
-        this.flag = flag;
-    }
-
-    @Override public void run() {
-        for(int i = 0 ; i < 5; i++){
-            if(flag){
-                System.out.println(Thread.currentThread().getName()+"——flag为true,执行逻辑");
-                flag = false;
-            }else{
-                System.out.println(Thread.currentThread().getName()+"——flag为false,执行逻辑");
-                flag = true;
-            }
+        for(int i = 0 ; i < 10; i ++){
+            new Thread(new FlagCheckThreadLocalRunnable()).start();
         }
     }
 }
 
 class FlagCheckThreadLocalRunnable implements Runnable{
 
-    private ThreadLocal<Boolean> flag = new ThreadLocal<Boolean>(){
-        @Override protected Boolean initialValue() {
-            return true;
-        }
-    };
-
-    /**
-     * @return the flag
-     */
-    public ThreadLocal<Boolean> getFlag() {
-        return flag;
-    }
+    private ThreadLocal<Byte[]> data = new ThreadLocal<>();
 
     @Override public void run() {
-        for(int i = 0 ; i < 5; i++){
-            if(flag.get()){
-                System.out.println(Thread.currentThread().getName()+"——flag为true,执行逻辑");
-                flag.set(false);
-            }else{
-                System.out.println(Thread.currentThread().getName()+"——flag为false,执行逻辑");
-                flag.set(true);
-            }
+        while(true){
+            data.set(new Byte[1000]);
         }
     }
 }

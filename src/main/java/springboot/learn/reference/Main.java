@@ -24,7 +24,7 @@ import sun.misc.GC;
 public class Main {
 
     public static void main(String[] args) {
-        weakHashMap();
+        weakReferenceInteger();
     }
 
     private static void weakReference(){
