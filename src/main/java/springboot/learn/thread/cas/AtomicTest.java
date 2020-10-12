@@ -48,15 +48,18 @@ public class AtomicTest {
         return value;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        AtomicTest atomicTest = new AtomicTest(0);
-        for(int i = 0 ; i < 10 ; i++){
-            MyThread myThread = new MyThread(atomicTest);
-            myThread.start();
-            myThread.join();
-        }
-        Thread.sleep(5000);
-        System.out.println(atomicTest.get());
+    public static void main(String[] args) throws InterruptedException, InstantiationException {
+        Object integer = unsafe.allocateInstance(Integer.class);
+        System.out.println(integer);
+
+        //        AtomicTest atomicTest = new AtomicTest(0);
+//        for(int i = 0 ; i < 10 ; i++){
+//            MyThread myThread = new MyThread(atomicTest);
+//            myThread.start();
+//            myThread.join();
+//        }
+//        Thread.sleep(5000);
+//        System.out.println(atomicTest.get());
     }
 }
 
