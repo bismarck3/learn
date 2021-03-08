@@ -7,6 +7,7 @@
 package springboot.learn.queue;
 
 import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.TimeUnit;
 
 import lombok.SneakyThrows;
 
@@ -21,12 +22,13 @@ import lombok.SneakyThrows;
 public class SynchronousQueueMain {
 
     public static void main(String[] args) throws InterruptedException {
-        SynchronousQueue<Integer> queue = new SynchronousQueue<>(true);
+        SynchronousQueue<Integer> queue = new SynchronousQueue<>(false);
         Thread thread = new Thread(new Runnable() {
             @SneakyThrows
             @Override
             public void run() {
                 queue.put(1);
+                System.out.println("over put");
             }
         }, "put");
         Thread thread2 = new Thread(new Runnable() {
@@ -34,6 +36,8 @@ public class SynchronousQueueMain {
             @Override
             public void run() {
                 queue.take();
+                Thread.sleep(5000);
+                System.out.println("over take");
             }
         }, "take");
         thread.start();

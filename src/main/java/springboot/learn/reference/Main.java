@@ -24,6 +24,19 @@ import sun.misc.GC;
 public class Main {
 
     public static void main(String[] args) {
+        compareReferenceIntegerObject();
+        //        weakHashMap();
+//        compareWeakMapIntegerObject();
+    }
+
+    private static void compareWeakMapIntegerObject() {
+//        weakHashMapObject();
+        weakHashMapInteger();
+    }
+
+    private static void compareReferenceIntegerObject() {
+        weakReference();
+        System.out.println("---");
         weakReferenceInteger();
     }
 
@@ -57,10 +70,10 @@ public class Main {
     }
 
     private static void weakHashMap(){
-        String s1 = "a";
-        String s2 = "b";
-        String s3 = "c";
-        WeakHashMap<String, Object> weakHashMap = new WeakHashMap<>();
+        Object s1 = new Object();
+        Object s2 = new Object();
+        Object s3 = new Object();
+        WeakHashMap<Object, Object> weakHashMap = new WeakHashMap<>();
         weakHashMap.put(s1, "1");
         weakHashMap.put(s2, "2");
         weakHashMap.put(s3, "3");
@@ -68,6 +81,8 @@ public class Main {
         s1 = null;
         s2 = null;
         System.gc();
+        weakHashMap.entrySet().forEach(System.out::println);
+        System.out.println("---");
         weakHashMap.remove(s3);
         weakHashMap.entrySet().forEach(System.out::println);
     }
@@ -86,7 +101,7 @@ public class Main {
     private static void weakHashMapInteger(){
         Integer[] integer = {5};
         ThreadLocal<Integer[]> numberThreadLocal = ThreadLocal.withInitial(() -> integer);
-        for(int i = 0 ; i < 5 ; i++){
+        for(int i = 0 ; i < 100 ; i++){
             new Thread(() -> {
                 integer[0] = integer[0] + 5;
                 numberThreadLocal.set(integer);
@@ -95,21 +110,21 @@ public class Main {
         }
     }
 
-    static class Number{
-        private Integer number = 0;
+}
+class Number{
+    private Integer number = 0;
 
-        /**
-         * @return the number
-         */
-        public Integer getNumber() {
-            return number;
-        }
+    /**
+     * @return the number
+     */
+    public Integer getNumber() {
+        return number;
+    }
 
-        /**
-         * @param number the number to set
-         */
-        public void setNumber(Integer number) {
-            this.number = number;
-        }
+    /**
+     * @param number the number to set
+     */
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }
