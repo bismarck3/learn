@@ -22,22 +22,7 @@ public class Main {
 
 
     public static void main(String[] args) throws ExecutionException, InterruptedException, TimeoutException {
-//        runAsync();
-//        supplyAsync();
-//        then();
-//        thenRun();
-//        thenCombine();
-//        afterBoth();
-//        exceptionally();
-//        whenComplete();
-//        handle();
-        test();
-    }
-
-    static void test(){
-        Void join = CompletableFuture.runAsync(() -> {
-        }).join();
-        System.out.println(join);
+        whenComplete();
     }
 
     static void handle() {
@@ -69,21 +54,13 @@ public class Main {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if (1 == 1) {
-                throw new RuntimeException("测试一下异常情况");
-            }
             return "s1";
         }).whenComplete((s, t) -> {
             System.out.println(s);
             if(t != null){
                 System.out.println(t.getMessage());
             }
-        })
-//            .exceptionally(e -> {
-//            System.out.println(e.getMessage());
-//            return "hello world";
-//        })
-            .join();
+        }).join();
         System.out.println(result);
     }
 
