@@ -17,6 +17,7 @@ class ListNode {
     int val;
     ListNode next;
 
+
     static ListNode get(int[] nums) {
         ListNode listNode = new ListNode(nums[0]);
         ListNode result = listNode;
