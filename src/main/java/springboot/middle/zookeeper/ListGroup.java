@@ -1,10 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper
- * @className springboot.learn.zookeeper.ListGroup
+ * @package springboot.middle.zookeeper
+ * @className springboot.middle.zookeeper.ListGroup
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper;
+package springboot.middle.zookeeper;
 
 import java.util.List;
 

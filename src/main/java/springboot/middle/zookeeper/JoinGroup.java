@@ -1,12 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper
- * @className springboot.learn.zookeeper.JoinGroup
+ * @package springboot.middle.zookeeper
+ * @className springboot.middle.zookeeper.JoinGroup
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper;
-
-import java.io.IOException;
+package springboot.middle.zookeeper;
 
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;

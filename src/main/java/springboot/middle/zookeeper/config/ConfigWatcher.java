@@ -1,10 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper.config
- * @className springboot.learn.zookeeper.config.ConfigWatcher
+ * @package springboot.middle.zookeeper.config
+ * @className springboot.middle.zookeeper.config.ConfigWatcher
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper.config;
+package springboot.middle.zookeeper.config;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;

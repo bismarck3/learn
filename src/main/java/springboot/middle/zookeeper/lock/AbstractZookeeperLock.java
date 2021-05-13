@@ -1,14 +1,11 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper.lock
- * @className springboot.learn.zookeeper.lock.AbstractZookeeperLock
+ * @package springboot.middle.zookeeper.lock
+ * @className springboot.middle.zookeeper.lock.AbstractZookeeperLock
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper.lock;
+package springboot.middle.zookeeper.lock;
 
-import java.util.concurrent.CountDownLatch;
-
-import org.apache.zookeeper.ZooKeeper;
 import org.I0Itec.zkclient.ZkClient;
 
 

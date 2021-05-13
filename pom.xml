@@ -152,7 +152,17 @@
 			<artifactId>zkclient</artifactId>
 			<version>0.10</version>
 		</dependency>
-<!-- 	<dependency> -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson</artifactId>
+			<version>3.15.4</version>
+		</dependency>
+		<!-- 	<dependency> -->
 <!-- 		<groupId>org.springframework.boot</groupId> -->
 <!-- 		<artifactId>spring-boot-starter-cache</artifactId> -->
 <!-- 	</dependency> -->

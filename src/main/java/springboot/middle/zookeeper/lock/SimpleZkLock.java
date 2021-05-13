@@ -1,10 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper.lock
- * @className springboot.learn.zookeeper.lock.ChildrenNodeLock
+ * @package springboot.middle.zookeeper.lock
+ * @className springboot.middle.zookeeper.lock.ChildrenNodeLock
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper.lock;
+package springboot.middle.zookeeper.lock;
 
 import java.util.concurrent.CountDownLatch;
 

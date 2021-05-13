@@ -1,10 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper
- * @className springboot.learn.zookeeper.config.ActiveKeyValueStore
+ * @package springboot.middle.zookeeper
+ * @className springboot.middle.zookeeper.config.ActiveKeyValueStore
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper.config;
+package springboot.middle.zookeeper.config;
 
 import java.nio.charset.Charset;
 
@@ -14,7 +14,7 @@ import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.data.Stat;
 
-import springboot.learn.zookeeper.ConnectionWatcher;
+import springboot.middle.zookeeper.ConnectionWatcher;
 
 /**
  * ActiveKeyValueStore

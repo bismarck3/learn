@@ -1,10 +1,10 @@
 /**
  * @projectName learn
- * @package springboot.learn.zookeeper
- * @className springboot.learn.zookeeper.config.ConfigUpdater
+ * @package springboot.middle.zookeeper
+ * @className springboot.middle.zookeeper.config.ConfigUpdater
  * @copyright Copyright 2021 Thuisoft, Inc. All rights reserved.
  */
-package springboot.learn.zookeeper.config;
+package springboot.middle.zookeeper.config;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
