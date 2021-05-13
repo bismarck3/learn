@@ -24,10 +24,6 @@ public class ReverseList {
            head = temp;
         }
         return tail;
-
-
-
-
     }
 
     public static void main(String[] args) {
