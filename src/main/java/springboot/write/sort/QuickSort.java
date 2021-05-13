@@ -34,13 +34,15 @@ public class QuickSort {
                 j--;
             }
             if (i < j) {
-                nums[i++] = nums[j];
+                nums[i] = nums[j];
+                i++;
             }
             while (nums[i] <= item && i < j) {
                 i++;
             }
             if (i < j) {
-                nums[j--] = nums[i];
+                nums[j] = nums[i];
+                j--;
             }
         }
         nums[i] = item;
@@ -49,7 +51,7 @@ public class QuickSort {
     }
 
     public static void main(String[] args) {
-        int[] nums = {2, 3, 231, 41, 34, 24, 132, 54, 1, 514, 5, 1451};
+        int[] nums = {2, 3, 231, 41, 34, 24, 132, 54, 1, 5};
         new QuickSort().quickSort(nums);
         System.out.println(Arrays.toString(nums));
     }
